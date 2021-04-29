@@ -5,7 +5,7 @@ const { buildSchema } = require('graphql');
 const Graphql = require('./models/graphql.model');
 
 async function main() {
-    // server config
+    // server configuration
     const port = process.env.PORT || 5000;
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
@@ -23,7 +23,8 @@ async function main() {
 
     const schema = buildSchema(`
         type Query {
-            products: [Product]
+            products: [Product],
+            createProduct(product_id: Int!, product_name: String!, product_slug: String!, sku: String!, brand: String!): Result
         },
         type Product {
             product_id: Int
@@ -31,11 +32,26 @@ async function main() {
             product_slug: String
             sku: String
             brand: String
+        },
+        type Result {
+            error: Boolean,
+            message: String
         }
     `);
 
+    const createProduct = function (product) {
+        console.log('createProduct', product)
+        let result = {
+            error: false,
+            message: "Product added successfully!"
+        }
+        Graphql.insert(product);
+        return result;
+    }
+
     const root = {
-        products: await Graphql.findAll()
+        products: await Graphql.findAll(),
+        createProduct: createProduct
     };
 
     app.use('/graphql', graphqlHTTP({

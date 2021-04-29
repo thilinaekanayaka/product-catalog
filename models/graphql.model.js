@@ -1,6 +1,7 @@
 const { graphql } = require('graphql');
 const Sequelize = require('sequelize');
 const { INTEGER, STRING } = require('sequelize');
+const Product = require('./product.model');
 
 const sequelize = new Sequelize('products_catalog', 'root', '', {
     host: 'localhost',
@@ -40,4 +41,12 @@ exports.findAll = async function () {
     }
 
     return productsArr;
+}
+
+exports.insert = async function (product) {
+    const newProduct = new Product(product);
+    Product.create(newProduct, function (err, product) {
+        if (err)
+            console.log(err);
+    });
 }
