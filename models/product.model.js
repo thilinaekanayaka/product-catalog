@@ -1,4 +1,4 @@
-const dbConn = require('../config/db.config');
+const databaseConnection = require('../config/db.config');
 
 const Product = function (product) {
     this.product_id = product.product_id;
@@ -9,7 +9,7 @@ const Product = function (product) {
 };
 
 Product.create = function (product, result) {
-    dbConn.query("INSERT INTO products SET ?", product, function (err, res) {
+    databaseConnection.query("INSERT INTO products SET ?", product, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -22,7 +22,7 @@ Product.create = function (product, result) {
 };
 
 Product.findById = function (id, result) {
-    dbConn.query("SELECT * FROM products WHERE product_id = ? ", id, function (err, res) {
+    databaseConnection.query("SELECT * FROM products WHERE product_id = ? ", id, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -34,7 +34,7 @@ Product.findById = function (id, result) {
 };
 
 Product.findAll = function (result) {
-    dbConn.query("SELECT * FROM products", function (err, res) {
+    databaseConnection.query("SELECT * FROM products", function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -47,7 +47,7 @@ Product.findAll = function (result) {
 };
 
 Product.update = function (id, product, result) {
-    dbConn.query("UPDATE products SET product_name=?,product_slug=?,sku=?,brand=? WHERE product_id = ?", [product.product_name, product.product_slug, product.sku, product.brand, id], function (err, res) {
+    databaseConnection.query("UPDATE products SET product_name=?,product_slug=?,sku=?,brand=? WHERE product_id = ?", [product.product_name, product.product_slug, product.sku, product.brand, id], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -58,7 +58,7 @@ Product.update = function (id, product, result) {
 };
 
 Product.delete = function (id, result) {
-    dbConn.query("DELETE FROM products WHERE product_id = ?", [id], function (err, res) {
+    databaseConnection.query("DELETE FROM products WHERE product_id = ?", [id], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
