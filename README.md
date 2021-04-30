@@ -29,6 +29,12 @@ Use npm to install the necessary packages.
 ```bash
 npm install
 ```
+## Database
+
+Restore the SQL backup from the repository.
+```bash
+products_catalog.sql
+```
 
 ## Running the app
 
