@@ -35,7 +35,8 @@ npm install
 ```bash
 npm start
 ```
-Then the application runs on http://localhost:5000.
+Then the REST APIs run on http://localhost:5000
+GraphQL runs on http://localhost:5000/graphql
 
 ## API Requests
 
