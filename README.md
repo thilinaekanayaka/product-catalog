@@ -53,10 +53,16 @@ Use a tool like Postman to make API requests. API endpoint,
 
 ## Sample API Requests
 
-
 ```bash
 GET http://localhost:5000/api/v1/products
 ```
 ```bash
 DELETE http://localhost:5000/api/v1/products/{product_id}
+```
+
+## REST APIs Postman Collection
+
+Import the following JSON to Postman for the REST API collection.
+```bash
+Products_Catalog.postman_collection.json
 ```
